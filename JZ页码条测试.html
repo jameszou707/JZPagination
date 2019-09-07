@@ -1,0 +1,52 @@
+<html>
+
+<head>
+  <title></title>
+  <meta charset='UTF-8' />
+  <script src="./JZPagination.js"></script>
+  <style>
+    div {
+      font-size: 14px;
+
+    }
+
+    a,
+    span {
+      border: 1px solid #000;
+      padding: 3px 10px;
+      margin: 3px 2px;
+      color: #000;
+      background-color:whitesmoke;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #fff;
+      background-color: #0094ff;
+    }
+
+    select {
+      margin: 5px;
+    }
+
+    a.active {
+      color: #fff;
+      background-color: #0094ff;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='pageBar'></div>
+  <script>
+    window.onload = function () {
+      makePageBar(toPage, 'pageBar', 1, 5, 8, 1000);
+    }
+
+    function toPage(pageIndex) {
+      makePageBar(toPage, 'pageBar', pageIndex, 5, 8, 1000);
+    }
+  </script>
+</body>
+
+</html>
