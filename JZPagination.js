@@ -1,5 +1,7 @@
-// 生成页码条方法   ( 页码点击回调方法 , 页码条容器 ，当前页码  ，  页容量  ，  页码组容量,   总行数 ，      简单模式 )
-function makePageBar(turnPageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSize = 6, roCount = 100, simpleModel = false) {
+// 生成页码条方法   ( 页码点击回调方法 , 页码条容器 ，当前页码  ，  页容量  ，  页码组容量,   总行数 ，      简单模式   ，          是否中文)
+function makePageBar(turnPageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSize = 6, roCount = 100, simpleModel = false, isCn = true) {
+// function makePageBar({turnPageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSize = 6, roCount = 100, simpleModel = false, isCn = true}) {
+    var langObj = isCn ? { next: '下一页', prev: '上一页', nextG: '下一组', prevG: '上一组' } : { next: 'Next', prev: 'Prev', nextG: 'NextGroup', prevG: 'PrevGroup' };
     //计算总页数（总行数 / 页容量）
     var pgCount = Math.ceil(roCount / pgSize);
     var groupFirstPageIndex = 0;  //当前页码组的第一个页码
@@ -27,7 +29,7 @@ function makePageBar(turnPageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSiz
             turnPageFunc(groupFirstPageIndex - 1);
         };
     }
-    pagePrevGroup.innerHTML = "PrevGroup";
+    pagePrevGroup.innerHTML = langObj.prevG;
     pageContainer.appendChild(pagePrevGroup);
 
     //生成 上一页 按钮
@@ -41,7 +43,7 @@ function makePageBar(turnPageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSiz
             alert("已经是第一页咯~~！");
         }
     };
-    pagePrev.innerHTML = "Prev";
+    pagePrev.innerHTML = langObj.prev;
     pageContainer.appendChild(pagePrev);
 
     //按照 页码组容量 和当前页码组 来生成 页码
@@ -49,7 +51,7 @@ function makePageBar(turnPageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSiz
     tempI = groupFirstPageIndex;//此时获得的是当前页码组的第一页
     do {
         //页码按钮
-        var pageA= document.createElement("a");
+        var pageA = document.createElement("a");
         pageA.href = "javascript:void(0)";
         if (tempI == pgIndex) {
             pageA.className = 'active';
@@ -75,7 +77,7 @@ function makePageBar(turnPageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSiz
             alert("已经是最后一页咯~~！");
         }
     };
-    pageNext.innerHTML = "Next";
+    pageNext.innerHTML = langObj.next;
     pageContainer.appendChild(pageNext);
 
     //生成 NextGroup
@@ -87,7 +89,7 @@ function makePageBar(turnPageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSiz
             turnPageFunc(groupFirstPageIndex + gpSize);
         };
     }
-    pageNextGroup.innerHTML = "NextGroup";
+    pageNextGroup.innerHTML = langObj.nextG;
     pageContainer.appendChild(pageNextGroup);
 
     if (!simpleModel) {
@@ -95,7 +97,7 @@ function makePageBar(turnPageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSiz
         sel.onchange = function () {
             var pi = this.value;
             turnPageFunc(pi);
-        }
+        };
         for (var i = 0; i < pgCount; i++) {
             var opt = new Option("第" + (i + 1) + "页", i + 1);
             if (i == (pgIndex - 1))

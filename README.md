@@ -1,20 +1,39 @@
 # JZPagination
 
-#### 介绍
+## 1.介绍
 一个简单实用的页码条JS生成插件
 
 + 可以展示 完整模式 和 简单模式
 
 ![JZPagination页码条](assets/JZPagination页码条.jpg)
 
-#### 安装教程
+## 2.安装教程
 
 1. 在需要页码条的html页面 导入 JZPagination.js文件
 2.  在页面上准备一个容器
    + 组件 生成  的是 文本 和 a 标签
    + 需要自己设置 样式表
 
-#### 使用说明
+## 3.使用说明
+
+### 3.1 参数说明
+
++ makePageBar(turnPageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSize = 6, roCount = 100, simpleModel = false, isCn = true) 
+
+| 参数名        | 说明                           | 默认值    |
+| ------------- | ------------------------------ | --------- |
+| turnPageFunc  | 翻页方法对象                   | undefined |
+| pageContainer | 页码条容器 dom 或 id           | undefined |
+| pgIndex       | 当前页码                       | 1         |
+| pgSize        | 页容量                         | 7         |
+| gpSize        | 页码组容量                     | 6         |
+| roCount       | 总行数                         | 100       |
+| simpleModel   | 简单模式 true / 完整模式 false | false     |
+| isCn          | 是否中文                       | true      |
+
+
+
+### 3.1 页码条模式
 
 + 简单模式：最后一个参数 设置为 true
 
@@ -73,4 +92,6 @@
   </script>
 </body>
 ```
+
+### 3.2 中英文切换
 
