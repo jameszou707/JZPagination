@@ -1,8 +1,5 @@
-//生成页码条方法（方法对象 , 页码条容器 ， 当前页码 ， 总页数 ， 页码组容量 ， 总行数）
-// function makePageBar(turnPageFunc, pageContainer, pgIndex, pgCount, gpSize, roCount) {
-
-//生成页码条方法（方法对象 , 页码条容器 ， 当前页码 ， 页容量 ， 页码组容量 ， 总行数）
-function makePageBar(turnPageFunc, pageContainer, pgIndex, pgSize, gpSize, roCount) {
+// 生成页码条方法   ( 页码点击回调方法 , 页码条容器 ，当前页码  ，  页容量  ，  页码组容量,   总行数 ，      简单模式 )
+function makePageBar(turnPageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSize = 6, roCount = 100, simpleModel = false) {
     //计算总页数（总行数 / 页容量）
     var pgCount = Math.ceil(roCount / pgSize);
     var groupFirstPageIndex = 0;  //当前页码组的第一个页码
@@ -18,7 +15,8 @@ function makePageBar(turnPageFunc, pageContainer, pgIndex, pgSize, gpSize, roCou
     //获得页码组总个数
     groupCount = Math.ceil(pgCount / gpSize);
     //生成统计数据
-    pageContainer.innerHTML = "页码：" + pgIndex + "/" + pgCount + " │ 共" + roCount + "条";
+    if (!simpleModel)
+        pageContainer.innerHTML = "页码：" + pgIndex + "/" + pgCount + " │ 共" + roCount + "条";
 
     //生成 上一个页码组 按钮
     var pagePrevGroup = document.createElement("a");
@@ -51,16 +49,12 @@ function makePageBar(turnPageFunc, pageContainer, pgIndex, pgSize, gpSize, roCou
     tempI = groupFirstPageIndex;//此时获得的是当前页码组的第一页
     do {
         //页码按钮
-        var pageA;
-        if (tempI == pgIndex) {//如果 当前生成页码 和 当前访问的页码 相等，则生成 文本，而不是超链接
-            //   pageA = document.createTextNode(tempI);
-            pageA = document.createElement("a");
+        var pageA= document.createElement("a");
+        pageA.href = "javascript:void(0)";
+        if (tempI == pgIndex) {
             pageA.className = 'active';
-            pageA.href = "javascript:void(0)";
             pageA.innerHTML = tempI;
         } else {//否则 生成超链接页码按钮
-            pageA = document.createElement("a");
-            pageA.href = "javascript:void(0)";
             pageA.setAttribute("pi", tempI);
             pageA.onclick = function () { turnPageFunc(this.getAttribute("pi")) };
             pageA.innerHTML = tempI;
@@ -96,16 +90,20 @@ function makePageBar(turnPageFunc, pageContainer, pgIndex, pgSize, gpSize, roCou
     pageNextGroup.innerHTML = "NextGroup";
     pageContainer.appendChild(pageNextGroup);
 
-    var sel = document.createElement("select");
-    sel.onchange = function () {
-        var pi = this.value;
-        turnPageFunc(pi);
+    if (!simpleModel) {
+        var sel = document.createElement("select");
+        sel.onchange = function () {
+            var pi = this.value;
+            turnPageFunc(pi);
+        }
+        for (var i = 0; i < pgCount; i++) {
+            var opt = new Option("第" + (i + 1) + "页", i + 1);
+            if (i == (pgIndex - 1))
+                opt.selected = true;
+            sel.options.add(opt);
+        }
+
+        pageContainer.appendChild(sel);
     }
-    for (var i = 0; i < pgCount; i++) {
-        var opt = new Option("第" + (i + 1) + "页", i + 1);
-        if (i == (pgIndex - 1))
-            opt.selected = true;
-        sel.options.add(opt);
-    }
-    pageContainer.appendChild(sel);
+
 };

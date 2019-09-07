@@ -3,7 +3,7 @@
 <head>
   <title></title>
   <meta charset='UTF-8' />
-  <script src="./JZPagination.js"></script>
+  <script src="./JZPagination_min.js"></script>
   <style>
     div {
       font-size: 14px;
@@ -40,11 +40,11 @@
   <div id='pageBar'></div>
   <script>
     window.onload = function () {
-      makePageBar(toPage, 'pageBar', 1, 5, 8, 1000);
+      makePageBar(toPage, 'pageBar', 1, 5, 8, 1000,false);
     }
 
     function toPage(pageIndex) {
-      makePageBar(toPage, 'pageBar', pageIndex, 5, 8, 1000);
+      makePageBar(toPage, 'pageBar', pageIndex, 5, 8, 1000,false);
     }
   </script>
 </body>
