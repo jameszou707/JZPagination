@@ -1,5 +1,6 @@
 // 生成页码条方法   ( 页码点击回调方法 , 页码条容器 ，当前页码  ，  页容量  ，  页码组容量,   总行数 ，      简单模式   ，          是否中文)
-function makePageBar({pageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSize = 6, roCount = 100, simpleModel = false, isCn = true}) {
+function makePageBar(turnPageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSize = 6, roCount = 100, simpleModel = false, isCn = true) {
+// function makePageBar({turnPageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSize = 6, roCount = 100, simpleModel = false, isCn = true}) {
     var langObj = isCn ? { next: '下一页', prev: '上一页', nextG: '下一组', prevG: '上一组' } : { next: 'Next', prev: 'Prev', nextG: 'NextGroup', prevG: 'PrevGroup' };
     //计算总页数（总行数 / 页容量）
     var pgCount = Math.ceil(roCount / pgSize);
@@ -25,7 +26,7 @@ function makePageBar({pageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSize =
     if (groupFirstPageIndex > 1) {
         pagePrevGroup.onclick = function () {
             pgIndex = groupFirstPageIndex - 1;
-            pageFunc(groupFirstPageIndex - 1);
+            turnPageFunc(groupFirstPageIndex - 1);
         };
     }
     pagePrevGroup.innerHTML = langObj.prevG;
@@ -37,7 +38,7 @@ function makePageBar({pageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSize =
     pagePrev.onclick = function () {
         if (pgIndex > 1) {
             pgIndex--;
-            pageFunc(pgIndex);
+            turnPageFunc(pgIndex);
         } else {
             alert("已经是第一页咯~~！");
         }
@@ -57,7 +58,7 @@ function makePageBar({pageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSize =
             pageA.innerHTML = tempI;
         } else {//否则 生成超链接页码按钮
             pageA.setAttribute("pi", tempI);
-            pageA.onclick = function () { pageFunc(this.getAttribute("pi")) };
+            pageA.onclick = function () { turnPageFunc(this.getAttribute("pi")) };
             pageA.innerHTML = tempI;
         }
         pageContainer.appendChild(pageA);
@@ -71,7 +72,7 @@ function makePageBar({pageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSize =
         //判断 当前页码 是否小于 总页数
         if (pgIndex < pgCount) {
             pgIndex++;
-            pageFunc(pgIndex);
+            turnPageFunc(pgIndex);
         } else {
             alert("已经是最后一页咯~~！");
         }
@@ -85,7 +86,7 @@ function makePageBar({pageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSize =
     if (groupFirstPageIndex + gpSize <= pgCount) {
         pageNextGroup.onclick = function () {
             pgIndex = groupFirstPageIndex + gpSize;
-            pageFunc(groupFirstPageIndex + gpSize);
+            turnPageFunc(groupFirstPageIndex + gpSize);
         };
     }
     pageNextGroup.innerHTML = langObj.nextG;
@@ -95,7 +96,7 @@ function makePageBar({pageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSize =
         var sel = document.createElement("select");
         sel.onchange = function () {
             var pi = this.value;
-            pageFunc(pi);
+            turnPageFunc(pi);
         };
         for (var i = 0; i < pgCount; i++) {
             var opt = new Option("第" + (i + 1) + "页", i + 1);

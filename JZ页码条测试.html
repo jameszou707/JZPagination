@@ -16,7 +16,7 @@
       padding: 3px 10px;
       margin: 3px 2px;
       color: #000;
-      background-color:whitesmoke;
+      background-color: whitesmoke;
       text-decoration: none;
     }
 
@@ -39,12 +39,28 @@
 <body>
   <div id='pageBar'></div>
   <script>
+
     window.onload = function () {
-      makePageBar(toPage, 'pageBar', 1, 5, 8, 1000,false);
+      // makePageBar(toPage, 'pageBar', 1, 5, 8, 1000,false);
+      makePageBar({
+        pageFunc: toPage,
+        pageContainer: 'pageBar',
+        pgIndex: 1,
+        roCount: 100,
+        simpleModel:false,
+        isCn:false
+      });
     }
 
     function toPage(pageIndex) {
-      makePageBar(toPage, 'pageBar', pageIndex, 5, 8, 1000,false);
+      makePageBar({
+        pageFunc: toPage,
+        pageContainer: 'pageBar',
+        pgIndex: pageIndex,
+        roCount: 100,
+        simpleModel:false,
+        isCn:false
+      });
     }
   </script>
 </body>

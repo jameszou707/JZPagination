@@ -18,16 +18,17 @@
 
 ### 3.1 参数说明
 
-+ makePageBar(turnPageFunc, pageContainer, pgIndex = 1, pgSize = 7, gpSize = 6, roCount = 100, simpleModel = false, isCn = true) 
++ makePageBar(option) 
++ option
 
 | 参数名        | 说明                           | 默认值    |
 | ------------- | ------------------------------ | --------- |
-| turnPageFunc  | 翻页方法对象                   | undefined |
+| pageFunc      | 翻页方法对象                   | undefined |
 | pageContainer | 页码条容器 dom 或 id           | undefined |
 | pgIndex       | 当前页码                       | 1         |
 | pgSize        | 页容量                         | 7         |
 | gpSize        | 页码组容量                     | 6         |
-| roCount       | 总行数                         | 100       |
+| roCount       | 总行数-从服务器获取            | 100       |
 | simpleModel   | 简单模式 true / 完整模式 false | false     |
 | isCn          | 是否中文                       | true      |
 
@@ -50,7 +51,12 @@
     // 2.页面加载完毕后 调用组件 页码条方法
     window.onload = function () {
       // 参数：翻页方法 , 页码条容器dom或id ，当前页码 ，页容量 ，页码组容量 ，总行数，是否简单模式
-      makePageBar(toPage, 'pageBar', 1, 5, 8, 1000,true);
+      makePageBar({
+        pageFunc: toPage,
+        pageContainer: 'pageBar',
+        pgIndex: 1,
+        roCount: 100
+      });
     }
 
     /**
@@ -58,7 +64,12 @@
      * @param {string}  pageIndex - 要前往的页码
      */
     function toPage(pageIndex) {
-      makePageBar(toPage, 'pageBar', pageIndex, 5, 8, 1000,true);
+      makePageBar({
+        pageFunc: toPage,
+        pageContainer: 'pageBar',
+        pgIndex: pageIndex,
+        roCount: 100
+      });
     }
   </script>
 </body>
@@ -79,7 +90,12 @@
     // 2.页面加载完毕后 调用组件 页码条方法
     window.onload = function () {
       // 参数：翻页方法 , 页码条容器dom或id ，当前页码 ，页容量 ，页码组容量 ，总行数，是否简单模式
-      makePageBar(toPage, 'pageBar', 1, 5, 8, 1000);
+      makePageBar({
+        pageFunc: toPage,
+        pageContainer: 'pageBar',
+        pgIndex: 1,
+        roCount: 100
+      });
     }
 
     /**
@@ -87,7 +103,12 @@
      * @param {string}  pageIndex - 要前往的页码
      */
     function toPage(pageIndex) {
-      makePageBar(toPage, 'pageBar', pageIndex, 5, 8, 1000);
+      makePageBar({
+        pageFunc: toPage,
+        pageContainer: 'pageBar',
+        pgIndex: pageIndex,
+        roCount: 100
+      });
     }
   </script>
 </body>
