@@ -36,26 +36,46 @@
 
 ### 3.1 页码条模式
 
-+ 简单模式：最后一个参数 设置为 true
++ 简单模式：simpleModel 设置为 true （默认 是 false）
 
 ![1567850669645](assets/1567850669645.png)
 
-```js
+```html
 <body>
   <script src="./JZPagination.js"></script>
-
+  <style>
+        #pageBar { font-size: 14px; }
+        #pageBar a, span {
+            border: 1px solid #000;
+            padding: 3px 10px;
+            margin: 3px 2px;
+            color: #000;
+            background-color: whitesmoke;
+            text-decoration: none;
+        }
+        #pageBar a:hover {
+            color: #fff;
+            background-color: #0094ff;
+        }
+        #pageBar select {
+            margin: 5px;
+        }
+        #pageBar a.active {
+            color: #fff;
+            background-color: #0094ff;
+        }
+  </style>
   <!-- 1.页码条 容器标签 -->
   <div id='pageBar'></div>
-
   <script>
     // 2.页面加载完毕后 调用组件 页码条方法
     window.onload = function () {
-      // 参数：翻页方法 , 页码条容器dom或id ，当前页码 ，页容量 ，页码组容量 ，总行数，是否简单模式
       makePageBar({
         pageFunc: toPage,
         pageContainer: 'pageBar',
         pgIndex: 1,
-        roCount: 100
+        roCount: 100,
+        simpleModel:true
       });
     }
 
@@ -68,14 +88,15 @@
         pageFunc: toPage,
         pageContainer: 'pageBar',
         pgIndex: pageIndex,
-        roCount: 100
+        roCount: 100,
+        simpleModel:true
       });
     }
   </script>
 </body>
 ```
 
-+ 完整模式：最后一个参数 设置为 false，或删掉
++ 完整模式：simpleModel 设置为 false
 
 ![JZPagination页码条](assets/JZPagination页码条.jpg)
 
@@ -89,7 +110,6 @@
   <script>
     // 2.页面加载完毕后 调用组件 页码条方法
     window.onload = function () {
-      // 参数：翻页方法 , 页码条容器dom或id ，当前页码 ，页容量 ，页码组容量 ，总行数，是否简单模式
       makePageBar({
         pageFunc: toPage,
         pageContainer: 'pageBar',
@@ -116,3 +136,4 @@
 
 ### 3.2 中英文切换
 
++ 默认为中文

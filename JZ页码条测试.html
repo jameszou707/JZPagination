@@ -5,34 +5,26 @@
   <meta charset='UTF-8' />
   <script src="./JZPagination_min.js"></script>
   <style>
-    div {
-      font-size: 14px;
-
-    }
-
-    a,
-    span {
-      border: 1px solid #000;
-      padding: 3px 10px;
-      margin: 3px 2px;
-      color: #000;
-      background-color: whitesmoke;
-      text-decoration: none;
-    }
-
-    a:hover {
-      color: #fff;
-      background-color: #0094ff;
-    }
-
-    select {
-      margin: 5px;
-    }
-
-    a.active {
-      color: #fff;
-      background-color: #0094ff;
-    }
+        #pageBar { font-size: 14px; }
+        #pageBar a, span {
+            border: 1px solid #000;
+            padding: 3px 10px;
+            margin: 3px 2px;
+            color: #000;
+            background-color: whitesmoke;
+            text-decoration: none;
+        }
+        #pageBar a:hover {
+            color: #fff;
+            background-color: #0094ff;
+        }
+        #pageBar select {
+            margin: 5px;
+        }
+        #pageBar a.active {
+            color: #fff;
+            background-color: #0094ff;
+        }
   </style>
 </head>
 
@@ -41,14 +33,12 @@
   <script>
 
     window.onload = function () {
-      // makePageBar(toPage, 'pageBar', 1, 5, 8, 1000,false);
       makePageBar({
         pageFunc: toPage,
         pageContainer: 'pageBar',
         pgIndex: 1,
         roCount: 100,
-        simpleModel:false,
-        isCn:false
+        simpleModel:true
       });
     }
 
@@ -58,8 +48,7 @@
         pageContainer: 'pageBar',
         pgIndex: pageIndex,
         roCount: 100,
-        simpleModel:false,
-        isCn:false
+        simpleModel:true
       });
     }
   </script>
